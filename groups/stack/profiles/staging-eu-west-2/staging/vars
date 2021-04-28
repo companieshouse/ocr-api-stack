@@ -1,0 +1,27 @@
+aws_bucket = "staging-eu-west-2.terraform-state.ch.gov.uk"
+remote_state_bucket = "ch-service-staging-terraform-state"
+environment = "staging"
+deploy_to = "staging"
+state_prefix = "env:/staging"
+aws_profile = "staging-eu-west-2"
+
+# Certificate for https access through ALB
+ssl_certificate_id = "arn:aws:iam::250991044064:server-certificate/Staging_2022"
+# The below fields are not currently used for staging since we do not use Route 53 in this environment
+# Need to raise a SN with the netword team to get LB to connect to ocr-api-staging.companieshouse.gov.uk
+external_top_level_domain = "-staging.companieshouse.gov.uk"
+internal_top_level_domain = "staging.aws.internal"
+
+ec2_key_pair_name = "ch-aws-staging"
+
+# app configs
+log_level = "DEBUG"
+ocr_tesseract_thread_pool_size = "4"
+
+# app cluster performance
+ec2_instance_type = "t3.medium"
+number_of_tasks = 1
+
+# machine properties
+machine_cpu_count = 2
+machine_amount_of_memory_mib = 2048
