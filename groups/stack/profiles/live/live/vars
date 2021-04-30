@@ -1,0 +1,30 @@
+aws_bucket = "live-eu-west-2.terraform-state.ch.gov.uk"
+remote_state_bucket = "ch-service-live-terraform-state"
+environment = "live"
+deploy_to = "live"
+state_prefix = "env:/live"
+aws_profile = "live-eu-west-2"
+
+
+# Certificate for https access through ALB 
+ssl_certificate_id = "arn:aws:iam::250991044064:server-certificate/starCertExpOct2021"
+
+# The below fields are not currently used for staging since we do not use Route 53 in this environment
+# Need to raise a SN with the network team to get LB to connect to ocr-api.companieshouse.gov.uk
+external_top_level_domain = ".companieshouse.gov.uk"
+internal_top_level_domain = "aws.internal"
+
+ec2_key_pair_name = "ch-aws-live"
+
+# app configs
+log_level = "DEBUG"
+ocr_tesseract_thread_pool_size = "12"
+
+# app cluster performance
+ec2_instance_type = "z1d.3xlarge"
+number_of_tasks = 2
+
+# machine properties
+machine_cpu_count = 12
+machine_amount_of_memory_mib = 7000
+
