@@ -39,3 +39,7 @@ AWSCLIV2.pkg
 # incase prototyping terraform-library-ecs-cluster changes
 
 terraform-library-ecs-cluster
+
+
+# ide
+.vscode

@@ -67,7 +67,7 @@ variable "number_of_tasks" {
   description = "The number of instances of the ocr-api task to run" 
 }
 variable "container_insights_enablement" {
-  description = "Whether contain sights are set  Value values are [enabled',disabled]"
+  description = "Whether container insights are set, valid values are [enabled,disabled]"
   type        = "string"
   default     = "enabled"
 }
