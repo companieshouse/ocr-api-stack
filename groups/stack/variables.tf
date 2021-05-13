@@ -66,6 +66,11 @@ variable "number_of_tasks" {
   type        = number
   description = "The number of instances of the ocr-api task to run" 
 }
+variable "container_insights_enablement" {
+  description = "Whether container insights are set, valid values are [enabled,disabled]"
+  type        = "string"
+  default     = "enabled"
+}
 
 # Auto-scaling Group
 variable "asg_max_instance_count" {

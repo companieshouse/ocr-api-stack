@@ -35,3 +35,11 @@ AWSCLIV2.pkg
 # Mac files
 .DS_Store
 ._*
+
+# incase prototyping terraform-library-ecs-cluster changes
+
+terraform-library-ecs-cluster
+
+
+# ide
+.vscode
