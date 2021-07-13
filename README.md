@@ -33,11 +33,3 @@ Notes on the internal / external naming:
 ## Secrets
 
 No secrets are required in this application stack
-
-## Dashboard
-
-The OCR Service dashboard was originally created via the AWS Cloudwatch console. Then the source was exported via (Actions->View/edit source menu option).
-
-This original source file was changed to:
-
-- Replace environmental related values with a variable (i.e. ` "SOURCE '/ecs/ocr-api-parent1/ocr-api'  -> "SOURCE '/ecs/ocr-api-${environment}/ocr-api' `)
