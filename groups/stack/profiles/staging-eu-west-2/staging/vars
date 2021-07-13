@@ -18,6 +18,7 @@ ec2_key_pair_name = "ch-aws-staging"
 # app configs
 log_level = "DEBUG"
 ocr_tesseract_thread_pool_size = "4"
+ocr_queue_capacity = "5"
 
 # app cluster performance
 ec2_instance_type = "t3.medium"
