@@ -71,6 +71,10 @@ variable "ocr_tesseract_thread_pool_size" {
   type        = string
   description = "The number of threads used in the ocr-api application for Tesseract processing (Image to text)"
 }
+variable "ocr_queue_capacity" {
+  type        = string
+  description = "The capcity of the queue used before thread pool used in the ocr-api application for Tesseract processing (Image to text)"
+}
 
 # Certificates
 variable "ssl_certificate_id" {

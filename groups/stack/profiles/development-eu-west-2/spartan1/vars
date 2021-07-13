@@ -16,6 +16,7 @@ ec2_key_pair_name = "chs-spartan1"
 # app configs
 log_level = "DEBUG"
 ocr_tesseract_thread_pool_size = "2"
+ocr_queue_capacity = "4"
 
 # app cluster performance
 

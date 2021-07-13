@@ -1,20 +1,22 @@
 # ocr-api-stack
 
-Infrastructure for the ocr-api service stack.
+Infrastructure for the OCR Service stack.
 
-This consists of one ECS Cluster with one microservice (ocr-api)
+This consists of one or more ECS Clusters. Each Cluster has a ELB with one microservice (`ocr-api`)
 
 ## Performance Variables
 
 These are configured in the profile environmental vars files (no defaults set):
 
-|     Variable                   | Destroy | Description                                                                       |
-|---                             |--- |---                                                                                |
-| ec2_instance_type              | Y | See [AWS Instance Types)[https://aws.amazon.com/ec2/instance-types/]              |
-| number_of_tasks                | ? | The number of instances of the ocr-api task to run                                |
-| machine_cpu_count              | ? | The number of vCPUs the ocr-api uses.                                             |
-| machine_amount_of_memory_mib   | ? | The amount of memory in MiB to allocate to the ocr-api.                                  |
-| ocr_tesseract_thread_pool_size | N | The number of threads used in the ocr-api application for Tesseract processing (Image to text) |
+|     Variable                     | Destroy | Description                                                                       |
+|---                               |--- |---                                                                                |
+| `ec2_instance_type`              | Y | See [AWS Instance Types)[https://aws.amazon.com/ec2/instance-types/]              |
+| `number_of_tasks`                | ? | The number of instances of the `ocr-api` task to run                                |
+| `machine_cpu_count`              | ? | The number of vCPUs the `ocr-api` uses.                                             |
+| `machine_amount_of_memory_mib`   | ? | The amount of memory in MiB to allocate to the `ocr-api`.                                  |
+| `ocr_tesseract_thread_pool_size` | N | The number of threads used in the `ocr-api` application for Tesseract processing (Image to text) |
+| `ocr_queue_capacity`             | N | The capacity of the queue used in the `ocr-api` application for Tesseract processing (Image to text) |
+
 
 - The **"Destroy"** column signifies that the environment should first be destroyed before applying this change to the environment (the main problem seems to be when we change to a more powerful environment),
 - If you create a cluster with **more than two tasks,** only two tasks will be running after creation,

@@ -19,6 +19,7 @@ ec2_key_pair_name = "ch-aws-live"
 # app configs
 log_level = "DEBUG"
 ocr_tesseract_thread_pool_size = "12"
+ocr_queue_capacity = "20"
 
 # app cluster performance
 ec2_instance_type = "z1d.3xlarge"

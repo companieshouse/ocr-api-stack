@@ -29,6 +29,7 @@ locals {
       ocr_api_release_version        : var.ocr_api_release_version
       ocr_api_application_port       : var.ocr_api_application_port
       ocr_tesseract_thread_pool_size : var.ocr_tesseract_thread_pool_size
+      ocr_queue_capacity             : var.ocr_queue_capacity
       number_of_tasks                : var.number_of_tasks
 
       # machine properties
