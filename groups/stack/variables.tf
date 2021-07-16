@@ -72,7 +72,7 @@ variable "number_of_tasks" {
 }
 variable "container_insights_enablement" {
   description = "Whether container insights are set, valid values are [enabled,disabled]"
-  type        = "string"
+  type        = string
   default     = "enabled"
 }
 
