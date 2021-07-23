@@ -1,6 +1,6 @@
-//----------------------------------------------------------------------
-// Standard Variables
-//----------------------------------------------------------------------
+# ----------------------------------------------------------------------
+#  Standard Variables
+# ----------------------------------------------------------------------
 variable "environment" {
   description = "The name of the environment this cluster is part of e.g. live, staging, dev. etc."
   type        = string
@@ -15,9 +15,9 @@ variable "aws_region" {
 }
 
 #
-//----------------------------------------------------------------------
-// Load Balancer Variables
-//----------------------------------------------------------------------
+# ----------------------------------------------------------------------
+#  Load Balancer Variables
+# ----------------------------------------------------------------------
 variable "elb_arn_suffix" {
   type = string
   description = "The Load Balancer ARN suffix for use with CloudWatch Metrics."
