@@ -2,7 +2,7 @@
 
 Infrastructure for the OCR Service stack.
 
-This consists of one or more ECS Clusters. Each Cluster has a ELB with one microservice (`ocr-api`)
+This consists of one or more ECS Clusters. Each Cluster has a ELB with one microservice (`ocr-api`) and a CloudWatch dashboard
 
 ## Performance Variables
 
@@ -37,8 +37,12 @@ No secrets are required in this application stack
 
 The `ocr-api` dashboard is created originally manually using the parent1 environment and then it is exported to the file `groups/stack/module-cloudwatch/dashboard.tmpl` and the following transformations made:
 
--  `app/ocr-api-parent1-lb/15c21529930662af` -> `${elb_arn_suffix}` (example `"app/ocr-api-parent1-lb/15c21529930662af"`-> "${elb_arn_suffix}")
-- `parent` -> `${environment}/`  (example ` "query": "SOURCE '/ecs/ocr-api-parent1/ocr-api'` -> ` "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api'`)
+- `app/ocr-api-parent1-lb/15c21529930662af` -> `${elb_arn_suffix}` (example `"app/ocr-api-parent1-lb/15c21529930662af"`-> "${elb_arn_suffix}")
+- `parent1` -> `${environment}`  (example `"query": "SOURCE '/ecs/ocr-api-parent1/ocr-api'` -> `"query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api'`)
 - `platform**` -> `${environment}**`
 
-The dashboard is made from CloudWatch logs and metrics (both general one such as the ELB Errors, CPU Utilization and project specific metrics such as queue-size-above-zero)
+The "Golden ruLe" when doing the above is that every widget with data in the Dashboard should have at lease one transformation performed.
+
+The dashboard is made from CloudWatch logs and "metric filter" and metrics (such as the ELB Errors, CPU Utilization).
+
+The logs and metric filter based dashboard widgets are dependent on events emitted from the [ocr-api](https://github.com/companieshouse/ocr-api) microservice.
