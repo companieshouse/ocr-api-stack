@@ -1,0 +1,322 @@
+{
+    "widgets": [
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 0,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_statistics' | stats avg(data.queue_size) by bin(30s)",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Queue Size (Ave/30s)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 13,
+            "x": 12,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields @message | filter @message like /error/ | stats count() by bin(15m)",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Application Errors (per 15 minutes)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 7,
+            "x": 0,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'http_request' | stats count() by bin(60s)",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Image to Text Requests (per minute)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 12,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_monitoring' | stats avg(data.time_on_queue_ms/60000) by bin(30s)",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Time in Queue (minutes)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 18,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_monitoring' | stats avg(data.file_size) by bin(30s)",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Image Size (Ave Bytes/30s)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 19,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HTTPCode_ELB_4XX_Count", "LoadBalancer", "${elb_arn_suffix}" ],
+                    [ ".", "HTTPCode_Target_5XX_Count", ".", ".", { "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-2",
+                "title": "ELB Errors (per 15 minutes)",
+                "period": 900,
+                "stat": "Sum",
+                "yAxis": {
+                    "left": {
+                        "min": 0
+                    },
+                    "right": {
+                        "min": 0
+                    }
+                }
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 13,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "NewConnectionCount", "LoadBalancer", "${elb_arn_suffix}", { "yAxis": "right" } ],
+                    [ ".", "TargetResponseTime", ".", "." ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-2",
+                "title": "ELB Connectivity",
+                "period": 300,
+                "yAxis": {
+                    "left": {
+                        "min": 0
+                    },
+                    "right": {
+                        "min": 0
+                    }
+                },
+                "stat": "Average"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 1,
+            "x": 6,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "ocr-api-metrics-${environment}", "queue-size-above-zero" ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-2",
+                "title": "Queue Size Metric (Max/30s)",
+                "period": 30,
+                "stat": "Maximum"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 13,
+            "x": 6,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields @message | filter @message like /error/ | stats count() by bin(60s)",
+                "region": "eu-west-2",
+                "title": "Application Errors (per minute)",
+                "view": "timeSeries",
+                "stacked": false
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 19,
+            "x": 0,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ "AWS/ApplicationELB", "HTTPCode_ELB_4XX_Count", "LoadBalancer", "${elb_arn_suffix}" ],
+                    [ ".", "HTTPCode_Target_5XX_Count", ".", ".", { "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "eu-west-2",
+                "title": "ELB Errors (per minute)",
+                "period": 60,
+                "stat": "Sum",
+                "yAxis": {
+                    "left": {
+                        "min": 0
+                    },
+                    "right": {
+                        "min": 0
+                    }
+                }
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 7,
+            "x": 6,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_monitoring' | stats avg(data.total_processing_time_ms/60000) by bin(30s)\n",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Total Txn Time (minutes)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 7,
+            "x": 12,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_monitoring' and   data.result_code = '0' | stats avg(data.ocr_processing_time_ms/60000) by bin(30s)",
+                "region": "eu-west-2",
+                "stacked": false,
+                "title": "Image to Text Time (minutes)",
+                "view": "timeSeries"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 7,
+            "x": 18,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_monitoring' and   data.result_code = '0' | stats count() by bin(60s)",
+                "region": "eu-west-2",
+                "title": "Successful Txn (per minute)",
+                "view": "timeSeries",
+                "stacked": false
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 13,
+            "x": 0,
+            "type": "log",
+            "properties": {
+                "query": "SOURCE '/ecs/ocr-api-${environment}/ocr-api' | fields data | filter data.log_record_name = 'ocr_monitoring' and data.result_code = '503' | stats count() by bin(60s)\n",
+                "region": "eu-west-2",
+                "title": "App Overload Errors (per minute)",
+                "view": "timeSeries",
+                "stacked": false
+            }
+        },
+        {
+            "height": 1,
+            "width": 24,
+            "y": 0,
+            "x": 0,
+            "type": "text",
+            "properties": {
+                "markdown": "# **OCR Service Dashboard - ${environment}**"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 19,
+            "x": 12,
+            "type": "metric",
+            "properties": {
+                "metrics": [
+                    [ { "id": "expr1m0", "label": "ocr-api-${environment}-cluster", "expression": "mm1m0 * 100 / mm0m0", "stat": "Average", "region": "eu-west-2" } ],
+                    [ "ECS/ContainerInsights", "CpuReserved", "ClusterName", "ocr-api-${environment}-cluster", { "id": "mm0m0", "visible": false } ],
+                    [ ".", "CpuUtilized", ".", ".", { "id": "mm1m0", "visible": false } ]
+                ],
+                "region": "eu-west-2",
+                "title": "CPU Utilization",
+                "legend": {
+                    "position": "bottom"
+                },
+                "timezone": "Local",
+                "liveData": false,
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "showUnits": false,
+                        "label": "Percent"
+                    },
+                    "right": {
+                        "min": 0
+                    }
+                },
+                "view": "timeSeries",
+                "stacked": false,
+                "stat": "Sum"
+            }
+        },
+        {
+            "height": 6,
+            "width": 6,
+            "y": 19,
+            "x": 18,
+            "type": "metric",
+            "properties": {
+                "region": "eu-west-2",
+                "title": "Memory Utilization",
+                "legend": {
+                    "position": "bottom"
+                },
+                "timezone": "Local",
+                "metrics": [
+                    [ { "id": "expr1m0", "label": "ocr-api-${environment}-cluster", "expression": "mm1m0 * 100 / mm0m0", "stat": "Average", "region": "eu-west-2" } ],
+                    [ "ECS/ContainerInsights", "MemoryReserved", "ClusterName", "ocr-api-${environment}-cluster", { "id": "mm0m0", "visible": false, "stat": "Sum" } ],
+                    [ ".", "MemoryUtilized", ".", ".", { "id": "mm1m0", "visible": false, "stat": "Sum" } ]
+                ],
+                "liveData": false,
+                "period": 60,
+                "yAxis": {
+                    "left": {
+                        "min": 0,
+                        "showUnits": false,
+                        "label": "Percent"
+                    },
+                    "right": {
+                        "min": 0
+                    }
+                },
+                "view": "timeSeries",
+                "stacked": false
+            }
+        }
+    ]
+}
