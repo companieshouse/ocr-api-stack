@@ -17,6 +17,7 @@ ec2_key_pair_name = "chs-parent1"
 log_level = "DEBUG"
 ocr_tesseract_thread_pool_size = "4"
 ocr_queue_capacity = "3"
+low_confidence_to_log = "0"
 
 # app cluster performance
 ec2_instance_type = "z1d.large"
