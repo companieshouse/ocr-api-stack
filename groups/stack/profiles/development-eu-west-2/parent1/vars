@@ -15,17 +15,18 @@ ec2_key_pair_name = "chs-parent1"
 
 # app configs
 log_level = "DEBUG"
-ocr_tesseract_thread_pool_size = "4"
-ocr_queue_capacity = "3"
 low_confidence_to_log = "0"
+ocr_tesseract_thread_pool_size = "12"
+ocr_queue_capacity = "20"
 
 # app cluster performance
-ec2_instance_type = "z1d.large"
+ec2_instance_type = "z1d.3xlarge"
 number_of_tasks = 2
 
 # machine properties
-machine_cpu_count = 2
+machine_cpu_count = 12
 machine_amount_of_memory_mib = 7000
+
 
 
 # Testing history
@@ -38,3 +39,4 @@ machine_amount_of_memory_mib = 7000
 # Test config 7 - ocr_tesseract_thread_pool_size = "16" ec2_instance_type = "c5n.4xlarge" number_of_tasks = 2 machine_cpu_count = 16 machine_amount_of_memory_mib = 7000
 # Test config 8 - ocr_tesseract_thread_pool_size = "2" ec2_instance_type = "z1d.large" number_of_tasks = 2 machine_cpu_count = 2 machine_amount_of_memory_mib = 7000
 # Test config 9 - ocr_tesseract_thread_pool_size = "4" ec2_instance_type = "z1d.large" number_of_tasks = 2 machine_cpu_count = 2 machine_amount_of_memory_mib = 7000
+# Test config 10 - ocr_tesseract_thread_pool_size = "12" ec2_instance_type = "z1d.3xlarge" number_of_tasks = 2 machine_cpu_count = 12 machine_amount_of_memory_mib = 7000 ocr_queue_capacity = "20"
