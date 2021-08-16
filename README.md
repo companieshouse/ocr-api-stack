@@ -16,6 +16,8 @@ These are configured in the profile environmental vars files (no defaults set):
 | `machine_amount_of_memory_mib`   | ? | The amount of memory in MiB to allocate to the `ocr-api`.                                  |
 | `ocr_tesseract_thread_pool_size` | N | The number of threads used in the `ocr-api` application for Tesseract processing (Image to text) |
 | `ocr_queue_capacity`             | N | The capacity of the queue used in the `ocr-api` application for Tesseract processing (Image to text) |
+| `low_confidence_to_log`          | N | The minimum confidence value used for logging low confidence scores (logs any confidence scores lower than the value set) |
+
 
 - The **"Destroy"** column signifies that the environment should first be destroyed before applying this change to the environment (the main problem seems to be when we change to a more powerful environment),
 - If you create a cluster with **more than two tasks,** only two tasks will be running after creation,

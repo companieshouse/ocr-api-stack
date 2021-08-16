@@ -51,6 +51,10 @@ variable "ocr_queue_capacity" {
   type        = string
   description = "The capcity of the queue used before thread pool used in the ocr-api application for Tesseract processing (Image to text)"
 }
+variable "low_confidence_to_log" {
+  type        = string
+  description = "The minimum confidence value used for logging low confidence scores (logs any confidence scores lower than the value set)"
+}
 
 # EC2
 variable "ec2_key_pair_name" {
