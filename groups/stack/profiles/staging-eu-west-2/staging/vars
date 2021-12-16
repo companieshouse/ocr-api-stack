@@ -6,7 +6,7 @@ state_prefix = "env:/staging"
 aws_profile = "staging-eu-west-2"
 
 # Certificate for https access through ALB
-ssl_certificate_id = "arn:aws:iam::250991044064:server-certificate/starCertExpOct2021"
+ssl_certificate_id = "arn:aws:acm:eu-west-2:250991044064:certificate/56b76dab-5728-4f83-a16d-e3dd59cd82c8"
 
 # The below fields are not currently used for staging since we do not use Route 53 in this environment
 # Need to raise a SN with the netword team to get LB to connect to ocr-api-staging.companieshouse.gov.uk
