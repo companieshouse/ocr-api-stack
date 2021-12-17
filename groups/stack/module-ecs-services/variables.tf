@@ -25,10 +25,6 @@ variable "subnet_ids" {
   type        = string
   description = "Subnet IDs of application subnets from aws-mm-networks remote state."
 }
-variable "web_access_cidrs" {
-  type        = list(string)
-  description = "Subnet CIDRs for web ingress rules in the security group."
-}
 
 # DNS
 variable "external_top_level_domain" {

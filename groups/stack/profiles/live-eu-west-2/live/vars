@@ -4,10 +4,11 @@ environment = "live"
 deploy_to = "live"
 state_prefix = "env:/live"
 aws_profile = "live-eu-west-2"
+aws_account_name = "ch-live"
 
 
 # Certificate for https access through ALB 
-ssl_certificate_id = "arn:aws:iam::449229032822:server-certificate/starCertExpOct2021"
+ssl_certificate_id = "arn:aws:acm:eu-west-2:449229032822:certificate/5c57a264-3168-4de8-8767-40fd0cedebf0"
 
 # The below fields are not currently used for live since we do not use Route 53 in this environment
 # Need to raise a SN with the network team to get LB to connect to ocr-api.companieshouse.gov.uk
