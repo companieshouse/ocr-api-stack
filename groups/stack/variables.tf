@@ -13,6 +13,10 @@ variable "aws_profile" {
   type        = string
   description = "The AWS profile to use for deployment."
 }
+variable "aws_account_name" {
+  type        = string
+  description = "The aws account name name, defined in envrionments vars."
+}
 
 # Terraform
 variable "aws_bucket" {
@@ -72,7 +76,7 @@ variable "ec2_image_id" {
 }
 variable "number_of_tasks" {
   type        = number
-  description = "The number of instances of the ocr-api task to run" 
+  description = "The number of instances of the ocr-api task to run"
 }
 variable "container_insights_enablement" {
   description = "Whether container insights are set, valid values are [enabled,disabled]"
@@ -105,7 +109,7 @@ variable "ssl_certificate_id" {
 
 # DNS
 variable "zone_id" {
-  default = "" # default of empty string is used as conditional when creating route53 records i.e. if no zone_id provided then no route53
+  default     = "" # default of empty string is used as conditional when creating route53 records i.e. if no zone_id provided then no route53
   type        = string
   description = "The ID of the hosted zone to contain the Route 53 record."
 }

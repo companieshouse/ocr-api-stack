@@ -4,6 +4,7 @@ environment = "staging"
 deploy_to = "staging"
 state_prefix = "env:/staging"
 aws_profile = "staging-eu-west-2"
+aws_account_name = "ch-staging"
 
 # Certificate for https access through ALB
 ssl_certificate_id = "arn:aws:acm:eu-west-2:250991044064:certificate/56b76dab-5728-4f83-a16d-e3dd59cd82c8"

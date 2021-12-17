@@ -4,6 +4,7 @@ environment = "live"
 deploy_to = "live"
 state_prefix = "env:/live"
 aws_profile = "live-eu-west-2"
+aws_account_name = "ch-live"
 
 
 # Certificate for https access through ALB 

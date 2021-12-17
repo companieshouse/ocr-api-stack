@@ -73,27 +73,36 @@ provider "vault" {
   }
 }
 
+data "vault_generic_secret" "heritage_application_cidrs" {
+  path = "/aws-accounts/network/${var.aws_account_name}/heritage/application-subnets"
+}
+
 locals {
   # stack name is hardcoded here in main.tf for this stack. It should not be overridden per env
-  stack_name       = "ocr-api"
-  stack_fullname   = "${local.stack_name}-stack"
-  name_prefix      = "${local.stack_name}-${var.environment}"
+  stack_name     = "ocr-api"
+  stack_fullname = "${local.stack_name}-stack"
+  name_prefix    = "${local.stack_name}-${var.environment}"
+
+  heritage_application_cidrs = values(data.vault_generic_secret.heritage_application_cidrs.data)
+  web_access_cidrs = concat(local.internal_cidrs, local.vpn_cidrs, local.management_private_subnet_cidrs,
+  split(",", local.application_cidrs), local.heritage_application_cidrs)
+
 }
 
 module "ecs-cluster" {
-  source = "git::git@github.com:companieshouse/terraform-library-ecs-cluster.git?ref=1.1.2"
+  source = "git::git@github.com:companieshouse/terraform-library-ecs-cluster.git?ref=1.1.3"
 
-  stack_name                 = local.stack_name
-  name_prefix                = local.name_prefix
-  environment                = var.environment
-  vpc_id                     = local.vpc_id
-  subnet_ids                 = local.application_ids
-  ec2_key_pair_name          = var.ec2_key_pair_name
-  ec2_instance_type          = var.ec2_instance_type
-  ec2_image_id               = var.ec2_image_id
-  asg_max_instance_count     = var.asg_max_instance_count
-  asg_min_instance_count     = var.asg_min_instance_count
-  asg_desired_instance_count = var.asg_desired_instance_count
+  stack_name                    = local.stack_name
+  name_prefix                   = local.name_prefix
+  environment                   = var.environment
+  vpc_id                        = local.vpc_id
+  subnet_ids                    = local.application_ids
+  ec2_key_pair_name             = var.ec2_key_pair_name
+  ec2_instance_type             = var.ec2_instance_type
+  ec2_image_id                  = var.ec2_image_id
+  asg_max_instance_count        = var.asg_max_instance_count
+  asg_min_instance_count        = var.asg_min_instance_count
+  asg_desired_instance_count    = var.asg_desired_instance_count
   container_insights_enablement = var.container_insights_enablement
 }
 
@@ -109,7 +118,7 @@ module "ecs-stack" {
   external_top_level_domain = var.external_top_level_domain
   internal_top_level_domain = var.internal_top_level_domain
   subnet_ids                = local.application_ids
-  web_access_cidrs          = concat(local.internal_cidrs,local.vpn_cidrs,local.management_private_subnet_cidrs,split(",",local.application_cidrs))
+  web_access_cidrs          = local.web_access_cidrs
 }
 
 module "ecs-services" {
@@ -117,11 +126,10 @@ module "ecs-services" {
 
   name_prefix               = local.name_prefix
   environment               = var.environment
-  tocr-api-lb-arn          = module.ecs-stack.ocr-api-lb-listener-arn
-  ocr-api-lb-listener-arn = module.ecs-stack.ocr-api-lb-listener-arn
+  tocr-api-lb-arn           = module.ecs-stack.ocr-api-lb-listener-arn
+  ocr-api-lb-listener-arn   = module.ecs-stack.ocr-api-lb-listener-arn
   vpc_id                    = local.vpc_id
   subnet_ids                = local.application_ids
-  web_access_cidrs          = concat(local.internal_cidrs,local.vpn_cidrs,local.management_private_subnet_cidrs,split(",",local.application_cidrs))
   aws_region                = var.aws_region
   ssl_certificate_id        = var.ssl_certificate_id
   external_top_level_domain = var.external_top_level_domain
@@ -140,14 +148,14 @@ module "ecs-services" {
   number_of_tasks                = var.number_of_tasks
 
   # machine properties
-  machine_cpu_count              = var.machine_cpu_count
-  machine_amount_of_memory_mib   = var.machine_amount_of_memory_mib
+  machine_cpu_count            = var.machine_cpu_count
+  machine_amount_of_memory_mib = var.machine_amount_of_memory_mib
 }
 
 # CloudWatch Dashboard
 module "cloudwatch" {
-  source = "./module-cloudwatch"
-  aws_region              = var.aws_region
-  elb_arn_suffix          = module.ecs-stack.elb_arn_suffix
-  environment             = var.environment
+  source         = "./module-cloudwatch"
+  aws_region     = var.aws_region
+  elb_arn_suffix = module.ecs-stack.elb_arn_suffix
+  environment    = var.environment
 }
