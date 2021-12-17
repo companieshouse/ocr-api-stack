@@ -15,7 +15,7 @@ variable "aws_profile" {
 }
 variable "aws_account_name" {
   type        = string
-  description = "The aws account name name, defined in envrionments vars."
+  description = "The aws account name, defined in envrionments vars."
 }
 
 # Terraform
