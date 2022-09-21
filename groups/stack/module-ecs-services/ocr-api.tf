@@ -32,6 +32,7 @@ locals {
       ocr_queue_capacity             : var.ocr_queue_capacity
       low_confidence_to_log          : var.low_confidence_to_log
       number_of_tasks                : var.number_of_tasks
+      host_white_list                : var.host_white_list
 
       # machine properties
       machine_cpu_count              : var.machine_cpu_count

@@ -4,7 +4,8 @@
             { "name": "LOGLEVEL", "value": "${log_level}" },
             { "name" : "OCR_TESSERACT_THREAD_POOL_SIZE", "value": "${ocr_tesseract_thread_pool_size}" },
             { "name" : "OCR_QUEUE_CAPACITY", "value": "${ocr_queue_capacity}" },
-            { "name" : "LOW_CONFIDENCE_TO_LOG", "value": "${low_confidence_to_log}" }
+            { "name" : "LOW_CONFIDENCE_TO_LOG", "value": "${low_confidence_to_log}" },
+            { "name" : "HOST_WHITE_LIST", "value": "${host_white_list}" }
         ],
         "name": "${service_name}",
         "image": "${docker_registry}/${service_name}:${ocr_api_release_version}",
