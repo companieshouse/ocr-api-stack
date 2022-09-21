@@ -19,7 +19,7 @@ log_level = "DEBUG"
 ocr_tesseract_thread_pool_size = "2"
 ocr_queue_capacity = "4"
 low_confidence_to_log = "0"
-host_white_list = "chpdev-sl7,chpdev-sl7.internal.ch"
+host_white_list = "chpdev-sl7,chpdev-sl7.internal.ch,chpdev-sl6,chpdev-sl6.internal.ch,chpdev-pl7,chpdev-pl7.internal.ch,chpdev-pl6,chpdev-pl6.internal.ch"
 
 # app cluster performance
 
