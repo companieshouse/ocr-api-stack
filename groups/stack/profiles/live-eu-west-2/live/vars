@@ -22,6 +22,7 @@ log_level = "DEBUG"
 ocr_tesseract_thread_pool_size = "12"
 ocr_queue_capacity = "20"
 low_confidence_to_log = "0"
+host_white_list = "chips.companieshouse.gov.uk"
 
 # app cluster performance
 ec2_instance_type = "z1d.3xlarge"
