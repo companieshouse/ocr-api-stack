@@ -75,6 +75,10 @@ variable "low_confidence_to_log" {
   type        = string
   description = "The minimum confidence value used for logging low confidence scores (logs any confidence scores lower than the value set)"
 }
+variable "host_white_list" {
+  type        = string
+  description = "The list of acceptable callback URL hosts that the `ocr-api` applicaton can accept in a request)"
+}
 
 # Certificates
 variable "ssl_certificate_id" {

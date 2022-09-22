@@ -17,6 +17,7 @@ These are configured in the profile environmental vars files (no defaults set):
 | `ocr_tesseract_thread_pool_size` | N | The number of threads used in the `ocr-api` application for Tesseract processing (Image to text) |
 | `ocr_queue_capacity`             | N | The capacity of the queue used in the `ocr-api` application for Tesseract processing (Image to text) |
 | `low_confidence_to_log`          | N | The minimum confidence value used for logging low confidence scores (logs any confidence scores lower than the value set) |
+| `host_white_list`                | N | The list of acceptable callback URL hosts that the `ocr-api` applicaton can accept in a request |
 
 
 - The **"Destroy"** column signifies that the environment should first be destroyed before applying this change to the environment (the main problem seems to be when we change to a more powerful environment),
